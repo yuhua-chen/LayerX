@@ -20,6 +20,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			window.movableByWindowBackground = true
 			window.hasShadow = false
 			self.window = window
+
+			adjustWindowToMiniumSize(NSMakeSize(480, 320))
+		}
+	}
+
+	func adjustWindowToMiniumSize(size: NSSize) {
+		guard let window = window else { return }
+
+		var frame = window.frame
+		if frame.size.width < size.width || frame.size.height < size.height {
+			frame.size = size
+			window.setFrame(frame, display: true)
 		}
 	}
 }
