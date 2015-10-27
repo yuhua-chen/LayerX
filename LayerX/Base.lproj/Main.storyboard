@@ -122,16 +122,19 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="View" id="HyV-fh-RgO">
                                     <items>
-                                        <menuItem title="Show Toolbar" keyEquivalent="t" id="snW-S8-Cw5">
-                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                        <menuItem title="Actual Size" keyEquivalent="0" id="snW-S8-Cw5">
                                             <connections>
-                                                <action selector="toggleToolbarShown:" target="Ady-hI-5gd" id="BXY-wc-z0C"/>
+                                                <action selector="actualSize:" target="Ady-hI-5gd" id="9nd-Uh-b0a"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Customize Toolbar…" id="1UK-8n-QPP">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        <menuItem title="Make Larger" keyEquivalent="+" id="Ed8-Vk-OS6">
                                             <connections>
-                                                <action selector="runToolbarCustomizationPalette:" target="Ady-hI-5gd" id="pQI-g3-MTW"/>
+                                                <action selector="makeLarger:" target="Voe-Tx-rLC" id="ldh-JS-1g5"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Make Smaller" keyEquivalent="-" id="trE-Hj-Y6i">
+                                            <connections>
+                                                <action selector="makeSmaller:" target="Voe-Tx-rLC" id="gWX-vc-gSr"/>
                                             </connections>
                                         </menuItem>
                                     </items>

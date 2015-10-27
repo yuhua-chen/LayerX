@@ -14,8 +14,17 @@ class ViewController: NSViewController {
 	@IBOutlet weak var sizeTextField: NSTextField!
 	@IBOutlet weak var placeholderTextField: NSTextField!
 
+	override var acceptsFirstResponder: Bool {
+		return true
+	}
+
 	deinit {
 		NSNotificationCenter.defaultCenter().removeObserver(self)
+	}
+
+	required init?(coder: NSCoder) {
+		super.init(coder: coder)
+		appDelegate().viewController = self
 	}
 
 	override func viewDidLoad() {
@@ -40,11 +49,11 @@ class ViewController: NSViewController {
 
 extension ViewController: MCDragAndDropImageViewDelegate {
 	func dragAndDropImageViewDidDrop(imageView: MCDragAndDropImageView) {
-		guard let image = imageView.image, let window = appDelegate().window else { return }
 
 		sizeTextField.hidden = false
 		placeholderTextField.hidden = true
-		window.resizeTo(image.size, animated: true)
+
+		appDelegate().actualSize(nil)
 	}
 }
 
