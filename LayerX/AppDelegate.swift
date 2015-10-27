@@ -13,25 +13,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	weak var window: NSWindow?
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
-		if let window = NSApp.windows.first {
-			window.styleMask = NSBorderlessWindowMask | NSResizableWindowMask
-			window.opaque = false
-			window.backgroundColor = NSColor.clearColor()
-			window.movableByWindowBackground = true
-			window.hasShadow = false
+		if let window = NSApp.windows.first as? MCWIndow {
+			window.fitsWithSize(NSMakeSize(480, 320))
 			self.window = window
-
-			adjustWindowToMiniumSize(NSMakeSize(480, 320))
-		}
-	}
-
-	func adjustWindowToMiniumSize(size: NSSize) {
-		guard let window = window else { return }
-
-		var frame = window.frame
-		if frame.size.width < size.width || frame.size.height < size.height {
-			frame.size = size
-			window.setFrame(frame, display: true)
 		}
 	}
 }
