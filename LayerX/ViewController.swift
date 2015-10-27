@@ -39,10 +39,12 @@ class ViewController: NSViewController {
 // MARK: - MCDragAndDropImageViewDelegate
 
 extension ViewController: MCDragAndDropImageViewDelegate {
-
 	func dragAndDropImageViewDidDrop(imageView: MCDragAndDropImageView) {
+		guard let image = imageView.image, let window = appDelegate().window else { return }
+
 		sizeTextField.hidden = false
 		placeholderTextField.hidden = true
+		window.resizeTo(image.size, animated: true)
 	}
 }
 

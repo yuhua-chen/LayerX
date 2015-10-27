@@ -24,4 +24,21 @@ class MCWIndow: NSWindow {
 			setFrame(frame, display: true)
 		}
 	}
+
+	func resizeTo(size: NSSize, animated: Bool) {
+		var frame = self.frame
+		frame.size = size
+
+		if !animated {
+			setFrame(frame, display: true)
+			return
+		}
+
+		let resizeAnimation = [NSViewAnimationTargetKey: self, NSViewAnimationEndFrameKey: NSValue(rect: frame)]
+		let animations = NSViewAnimation(viewAnimations: [resizeAnimation])
+		animations.animationBlockingMode = .Blocking
+		animations.animationCurve = .EaseInOut
+		animations.duration = 0.15
+		animations.startAnimation()
+	}
 }

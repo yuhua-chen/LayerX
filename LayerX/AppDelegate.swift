@@ -11,7 +11,7 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-	weak var window: NSWindow?
+	weak var window: MCWIndow?
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
 		if let window = NSApp.windows.first as? MCWIndow {
 			window.fitsWithSize(NSMakeSize(480, 320))
