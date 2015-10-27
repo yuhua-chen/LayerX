@@ -10,18 +10,46 @@ import Cocoa
 
 class ViewController: NSViewController {
 
+	@IBOutlet weak var imageView: MCDragAndDropImageView!
+	@IBOutlet weak var sizeTextField: NSTextField!
+	@IBOutlet weak var placeholderTextField: NSTextField!
+
+	deinit {
+		NSNotificationCenter.defaultCenter().removeObserver(self)
+	}
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		// Do any additional setup after loading the view.
+		imageView.delegate = self
+
+		sizeTextField.layer?.cornerRadius = 3
+		sizeTextField.layer?.masksToBounds = true
+
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: "windowDidResize:", name: NSWindowDidResizeNotification, object: appDelegate().window)
 	}
 
-	override var representedObject: AnyObject? {
-		didSet {
-		// Update the view, if already loaded.
-		}
+	func windowDidResize(notification: NSNotification) {
+		let window = notification.object as! NSWindow
+		let size = window.frame.size
+		sizeTextField.stringValue = "\(Int(size.width))x\(Int(size.height))"
 	}
-
-
 }
 
+// MARK: - MCDragAndDropImageViewDelegate
+
+extension ViewController: MCDragAndDropImageViewDelegate {
+
+	func dragAndDropImageViewDidDrop(imageView: MCDragAndDropImageView) {
+		sizeTextField.hidden = false
+		placeholderTextField.hidden = true
+	}
+}
+
+// MARK: - Movable NSView
+
+class MCMovableView: NSView{
+	override var mouseDownCanMoveWindow:Bool {
+		return true
+	}
+}

@@ -11,16 +11,22 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-
-
+	weak var window: NSWindow?
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
-		// Insert code here to initialize your application
+		if let window = NSApp.windows.first {
+			window.styleMask = NSBorderlessWindowMask | NSResizableWindowMask
+			window.opaque = false
+			window.backgroundColor = NSColor.clearColor()
+			window.movableByWindowBackground = true
+			window.hasShadow = false
+			self.window = window
+		}
 	}
+}
 
-	func applicationWillTerminate(aNotification: NSNotification) {
-		// Insert code here to tear down your application
-	}
+// MARK: - Helper
 
-
+func appDelegate() -> AppDelegate {
+	return NSApp.delegate as! AppDelegate
 }
 

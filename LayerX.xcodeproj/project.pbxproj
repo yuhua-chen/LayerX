@@ -11,6 +11,7 @@
 		8C09F9F71BDE2E5C00DD457E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09F9F61BDE2E5C00DD457E /* ViewController.swift */; };
 		8C09F9F91BDE2E5C00DD457E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C09F9F81BDE2E5C00DD457E /* Assets.xcassets */; };
 		8C09F9FC1BDE2E5C00DD457E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C09F9FA1BDE2E5C00DD457E /* Main.storyboard */; };
+		8C09FA041BDE324500DD457E /* MCDragAndDropImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09FA031BDE324500DD457E /* MCDragAndDropImageView.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		8C09F9F81BDE2E5C00DD457E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8C09F9FB1BDE2E5C00DD457E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8C09F9FD1BDE2E5C00DD457E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8C09FA031BDE324500DD457E /* MCDragAndDropImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCDragAndDropImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			children = (
 				8C09F9F41BDE2E5C00DD457E /* AppDelegate.swift */,
 				8C09F9F61BDE2E5C00DD457E /* ViewController.swift */,
+				8C09FA031BDE324500DD457E /* MCDragAndDropImageView.swift */,
 				8C09F9F81BDE2E5C00DD457E /* Assets.xcassets */,
 				8C09F9FA1BDE2E5C00DD457E /* Main.storyboard */,
 				8C09F9FD1BDE2E5C00DD457E /* Info.plist */,
@@ -132,6 +135,7 @@
 			files = (
 				8C09F9F71BDE2E5C00DD457E /* ViewController.swift in Sources */,
 				8C09F9F51BDE2E5C00DD457E /* AppDelegate.swift in Sources */,
+				8C09FA041BDE324500DD457E /* MCDragAndDropImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

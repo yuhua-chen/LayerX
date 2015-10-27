@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6198" systemVersion="14A297b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6198"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -641,12 +641,12 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="LayerX" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
         </scene>
-        <!--Window Controller - Window-->
+        <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
@@ -667,11 +667,48 @@
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="m2S-Jp-Qdl">
+                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="LayerX" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="m2S-Jp-Qdl" customClass="MCMovableView" customModule="LayerX" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="249" verticalCompressionResistancePriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="pOu-B0-2Yd" customClass="MCDragAndDropImageView" customModule="LayerX" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" id="55W-zB-lko"/>
+                            </imageView>
+                            <textField hidden="YES" wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JAT-ZL-8HB">
+                                <rect key="frame" x="454" y="243" width="16" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" alignment="center" title="0" drawsBackground="YES" id="Mmp-Eh-bBs">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8Vs-Az-CYd">
+                                <rect key="frame" x="148" y="123" width="184" height="25"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Drop Images here." id="vTq-g5-aKV">
+                                    <font key="font" size="20" name="HelveticaNeue-Bold"/>
+                                    <color key="textColor" name="scrollBarColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="8Vs-Az-CYd" firstAttribute="centerY" secondItem="m2S-Jp-Qdl" secondAttribute="centerY" id="6fI-na-pdX"/>
+                            <constraint firstItem="8Vs-Az-CYd" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="RwW-eB-OYh"/>
+                            <constraint firstItem="JAT-ZL-8HB" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="10" id="WnK-c6-NWw"/>
+                            <constraint firstItem="pOu-B0-2Yd" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="aC7-xh-2BR"/>
+                            <constraint firstItem="pOu-B0-2Yd" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="lhy-17-EcM"/>
+                            <constraint firstAttribute="trailing" secondItem="pOu-B0-2Yd" secondAttribute="trailing" id="qbm-Dq-jeg"/>
+                            <constraint firstAttribute="bottom" secondItem="pOu-B0-2Yd" secondAttribute="bottom" id="r2U-99-hj5"/>
+                            <constraint firstAttribute="trailing" secondItem="JAT-ZL-8HB" secondAttribute="trailing" constant="10" id="xlU-hc-l09"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="pOu-B0-2Yd" id="OT9-S1-m4L"/>
+                        <outlet property="placeholderTextField" destination="8Vs-Az-CYd" id="env-Po-Bb7"/>
+                        <outlet property="sizeTextField" destination="JAT-ZL-8HB" id="vIP-80-PVG"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
