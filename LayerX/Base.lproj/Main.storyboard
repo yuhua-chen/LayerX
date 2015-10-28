@@ -124,17 +124,28 @@
                                     <items>
                                         <menuItem title="Actual Size" keyEquivalent="0" id="snW-S8-Cw5">
                                             <connections>
-                                                <action selector="actualSize:" target="Ady-hI-5gd" id="9nd-Uh-b0a"/>
+                                                <action selector="actualSize:" target="Voe-Tx-rLC" id="Rr0-Sv-VSe"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Make Larger" keyEquivalent="+" id="Ed8-Vk-OS6">
+                                        <menuItem title="Scale Up" keyEquivalent="+" id="Ed8-Vk-OS6">
                                             <connections>
                                                 <action selector="makeLarger:" target="Voe-Tx-rLC" id="ldh-JS-1g5"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Make Smaller" keyEquivalent="-" id="trE-Hj-Y6i">
+                                        <menuItem title="Scale Down" keyEquivalent="-" id="trE-Hj-Y6i">
                                             <connections>
                                                 <action selector="makeSmaller:" target="Voe-Tx-rLC" id="gWX-vc-gSr"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="Uol-cd-eOj"/>
+                                        <menuItem title="Increase Transparency" keyEquivalent="j" id="PLz-nj-Geg">
+                                            <connections>
+                                                <action selector="increaseTransparency:" target="Voe-Tx-rLC" id="O9E-CS-NRG"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Reduce Transparency" keyEquivalent="k" id="P7g-e7-fyw">
+                                            <connections>
+                                                <action selector="reduceTransparency:" target="Voe-Tx-rLC" id="6jy-Px-MpF"/>
                                             </connections>
                                         </menuItem>
                                     </items>

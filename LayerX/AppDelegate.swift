@@ -43,6 +43,18 @@ extension AppDelegate {
 		window.resizeTo(size, animated: true)
 	}
 
+	@IBAction func increaseTransparency(sender: AnyObject) {
+		var alpha = viewController.imageView.alphaValue
+		alpha -= 0.1
+		viewController.imageView.alphaValue = max(alpha, 0.05)
+	}
+
+	@IBAction func reduceTransparency(sender: AnyObject) {
+		var alpha = viewController.imageView.alphaValue
+		alpha += 0.1
+		viewController.imageView.alphaValue = min(alpha, 1.0)
+	}
+
 	override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
 		return viewController.imageView.image != nil
 	}
