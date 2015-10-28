@@ -43,6 +43,16 @@ class ViewController: NSViewController {
 		let size = window.frame.size
 		sizeTextField.stringValue = "\(Int(size.width))x\(Int(size.height))"
 	}
+
+	override func scrollWheel(theEvent: NSEvent) {
+		guard let _ = imageView.image else { return }
+
+		let delta = theEvent.deltaY * 0.005;
+		var alpha = imageView.alphaValue - delta
+		alpha = min(alpha, 1)
+		alpha = max(alpha, 0)
+		imageView.alphaValue = alpha
+	}
 }
 
 // MARK: - MCDragAndDropImageViewDelegate
