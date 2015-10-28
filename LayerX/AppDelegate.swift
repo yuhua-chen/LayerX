@@ -55,6 +55,18 @@ extension AppDelegate {
 		viewController.imageView.alphaValue = min(alpha, 1.0)
 	}
 
+	
+	@IBAction func toggleLockWindow(sender: AnyObject) {
+		let menuItem = sender as! NSMenuItem
+		if menuItem.title == "Lock" {
+			menuItem.title  = "Unlock"
+			window.movable = false
+		} else {
+			menuItem.title  = "Lock"
+			window.movable = true
+		}
+	}
+
 	override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
 		return viewController.imageView.image != nil
 	}
