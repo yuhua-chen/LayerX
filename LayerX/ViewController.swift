@@ -50,7 +50,7 @@ class ViewController: NSViewController {
 		let delta = theEvent.deltaY * 0.005;
 		var alpha = imageView.alphaValue - delta
 		alpha = min(alpha, 1)
-		alpha = max(alpha, 0)
+		alpha = max(alpha, 0.05)
 		imageView.alphaValue = alpha
 	}
 }
