@@ -65,6 +65,8 @@ extension AppDelegate {
 			menuItem.title  = "Lock"
 			window.movable = true
 		}
+
+		viewController.lockIconImageView.hidden = window.movable
 	}
 
 	override func validateMenuItem(menuItem: NSMenuItem) -> Bool {

@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -239,8 +240,17 @@
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                                 </textFieldCell>
                             </textField>
+                            <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3I3-1H-JKb">
+                                <rect key="frame" x="446" y="10" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="3I3-1H-JKb" secondAttribute="height" multiplier="1:1" id="BQz-pm-nY9"/>
+                                    <constraint firstAttribute="width" constant="24" id="x71-Sn-2Dl"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="lock" id="4Zf-oV-Kj0"/>
+                            </imageView>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="3I3-1H-JKb" secondAttribute="bottom" constant="10" id="64H-0g-nnO"/>
                             <constraint firstItem="8Vs-Az-CYd" firstAttribute="centerY" secondItem="m2S-Jp-Qdl" secondAttribute="centerY" id="6fI-na-pdX"/>
                             <constraint firstItem="8Vs-Az-CYd" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="RwW-eB-OYh"/>
                             <constraint firstItem="JAT-ZL-8HB" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="10" id="WnK-c6-NWw"/>
@@ -248,11 +258,13 @@
                             <constraint firstItem="pOu-B0-2Yd" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="lhy-17-EcM"/>
                             <constraint firstAttribute="trailing" secondItem="pOu-B0-2Yd" secondAttribute="trailing" id="qbm-Dq-jeg"/>
                             <constraint firstAttribute="bottom" secondItem="pOu-B0-2Yd" secondAttribute="bottom" id="r2U-99-hj5"/>
+                            <constraint firstAttribute="trailing" secondItem="3I3-1H-JKb" secondAttribute="trailing" constant="10" id="und-pJ-9Mz"/>
                             <constraint firstAttribute="trailing" secondItem="JAT-ZL-8HB" secondAttribute="trailing" constant="10" id="xlU-hc-l09"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="imageView" destination="pOu-B0-2Yd" id="OT9-S1-m4L"/>
+                        <outlet property="lockIconImageView" destination="3I3-1H-JKb" id="Nka-rj-tDO"/>
                         <outlet property="placeholderTextField" destination="8Vs-Az-CYd" id="env-Po-Bb7"/>
                         <outlet property="sizeTextField" destination="JAT-ZL-8HB" id="vIP-80-PVG"/>
                     </connections>
@@ -262,4 +274,7 @@
             <point key="canvasLocation" x="75" y="655"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="lock" width="16" height="16"/>
+    </resources>
 </document>
