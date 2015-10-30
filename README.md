@@ -8,11 +8,11 @@ Support Mac OS X 10.10 or later.
  
 # Features
 
-[x] Drag and drop images  
-[x] Keyboard Shortcuts
-[x] Adjust transparency  
-[x] Lock images
-[X] Aspect ratio scaling
+- [x] Drag and drop images
+- [x] Keyboard Shortcuts
+- [x] Adjust transparency  
+- [x] Lock images
+- [X] Aspect ratio scaling
 
 # Keyboard Shortcuts
 
