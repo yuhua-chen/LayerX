@@ -31,6 +31,12 @@ class MCDragAndDropImageView: NSImageView {
 
 	override func drawRect(dirtyRect: NSRect) {
 		super.drawRect(dirtyRect)
+
+		if let _ = image {
+			layer?.backgroundColor = NSColor.clearColor().CGColor
+			return
+		}
+
 		layer?.backgroundColor = NSColor(white: highlighted ? 0.5 : 0.8, alpha: 1.0).CGColor
 	}
 
