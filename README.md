@@ -2,6 +2,8 @@
 
 An intuitive app to display transparent images on screen.
 
+[![Demo](http://img.youtube.com/vi/35KixjZBDjY/0.jpg)](http://www.youtube.com/watch?v=35KixjZBDjY)
+
 # System requirements
 
 Support Mac OS X 10.10 or later.
