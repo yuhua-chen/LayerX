@@ -43,6 +43,20 @@ extension AppDelegate {
 		window.resizeTo(size, animated: true)
 	}
 
+	@IBAction func makeLargerOnePixel(sender: AnyObject) {
+		var size = window.frame.size
+		size.width += 1
+		size.height += 1
+		window.resizeTo(size, animated: true)
+	}
+
+	@IBAction func makeSmallerOnePixel(sender: AnyObject) {
+		var size = window.frame.size
+		size.width -= 1
+		size.height -= 1
+		window.resizeTo(size, animated: true)
+	}
+
 	@IBAction func increaseTransparency(sender: AnyObject) {
 		var alpha = viewController.imageView.alphaValue
 		alpha -= 0.1

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -138,6 +138,18 @@
                                                 <action selector="makeSmaller:" target="Voe-Tx-rLC" id="gWX-vc-gSr"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Scale Up 1px" keyEquivalent="=" id="QFF-N1-xBx">
+                                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="makeLargerOnePixel:" target="Voe-Tx-rLC" id="a6e-El-RWw"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Scale Down 1px" keyEquivalent="-" id="mKa-lu-KYo">
+                                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="makeSmallerOnePixel:" target="Voe-Tx-rLC" id="lBc-iQ-i2i"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="Uol-cd-eOj"/>
                                         <menuItem title="Increase Transparency" keyEquivalent="j" id="PLz-nj-Geg">
                                             <connections>
@@ -224,7 +236,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" id="55W-zB-lko"/>
                             </imageView>
-                            <textField hidden="YES" wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JAT-ZL-8HB">
+                            <textField hidden="YES" wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JAT-ZL-8HB">
                                 <rect key="frame" x="454" y="243" width="16" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" alignment="center" title="0" drawsBackground="YES" id="Mmp-Eh-bBs">
                                     <font key="font" metaFont="system"/>
