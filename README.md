@@ -23,8 +23,10 @@ Support Mac OS X 10.10 or later.
 | Key | Action |
 |:---|:---|
 |`⌘ 0`| Acutal image size.|
-|`⌘ -`| Scale up 10%.|
-|`⌘ +`| Scale down 10%.|
+|`⌘ +`| Scale up 10%.|
+|`⌘ -`| Scale down 10%.|
+|`^ ⌘ +`| Scale up 1px.|
+|`^ ⌘ -`| Scale down 1px.|
 
 ### Alpha
 
@@ -37,7 +39,7 @@ Support Mac OS X 10.10 or later.
 
 |Key|Action|
 |:---|:---|
-|`⌘ L`| Lock images.|
+|`⌘ L`| Lock images and make window always on top.|
 
 # Mouse events
 
