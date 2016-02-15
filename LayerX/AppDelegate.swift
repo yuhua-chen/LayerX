@@ -61,9 +61,11 @@ extension AppDelegate {
 		if menuItem.title == "Lock" {
 			menuItem.title  = "Unlock"
 			window.movable = false
+			window.level = Int(CGWindowLevelForKey(.MaximumWindowLevelKey))
 		} else {
 			menuItem.title  = "Lock"
 			window.movable = true
+			window.level = Int(CGWindowLevelForKey(.NormalWindowLevelKey))
 		}
 
 		viewController.lockIconImageView.hidden = window.movable
