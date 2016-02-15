@@ -11,8 +11,8 @@
 		8C09F9F71BDE2E5C00DD457E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09F9F61BDE2E5C00DD457E /* ViewController.swift */; };
 		8C09F9F91BDE2E5C00DD457E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C09F9F81BDE2E5C00DD457E /* Assets.xcassets */; };
 		8C09F9FC1BDE2E5C00DD457E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C09F9FA1BDE2E5C00DD457E /* Main.storyboard */; };
-		8C09FA041BDE324500DD457E /* MCDragAndDropImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09FA031BDE324500DD457E /* MCDragAndDropImageView.swift */; settings = {ASSET_TAGS = (); }; };
-		8C09FA0C1BDF5F7300DD457E /* MCWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09FA0B1BDF5F7300DD457E /* MCWindow.swift */; settings = {ASSET_TAGS = (); }; };
+		8C09FA041BDE324500DD457E /* MCDragAndDropImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09FA031BDE324500DD457E /* MCDragAndDropImageView.swift */; };
+		8C09FA0C1BDF5F7300DD457E /* MCWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09FA0B1BDF5F7300DD457E /* MCWindow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
