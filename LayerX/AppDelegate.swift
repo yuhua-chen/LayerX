@@ -75,10 +75,12 @@ extension AppDelegate {
 		if menuItem.title == "Lock" {
 			menuItem.title  = "Unlock"
 			window.movable = false
+			window.ignoresMouseEvents = true
 			window.level = Int(CGWindowLevelForKey(.MaximumWindowLevelKey))
 		} else {
 			menuItem.title  = "Lock"
 			window.movable = true
+			window.ignoresMouseEvents = false
 			window.level = Int(CGWindowLevelForKey(.NormalWindowLevelKey))
 		}
 
