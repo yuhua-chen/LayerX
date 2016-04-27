@@ -13,6 +13,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	weak var window: MCWIndow!
 	weak var viewController: ViewController!
+    var isLockIconHiddenWhileLocked = false {
+        didSet { viewController.lockIconImageView.hidden = window.movable || isLockIconHiddenWhileLocked }
+    }
 
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
 		if let window = NSApp.windows.first as? MCWIndow {
@@ -82,8 +85,14 @@ extension AppDelegate {
 			window.level = Int(CGWindowLevelForKey(.NormalWindowLevelKey))
 		}
 
-		viewController.lockIconImageView.hidden = window.movable
+		viewController.lockIconImageView.hidden = window.movable || isLockIconHiddenWhileLocked
 	}
+    
+    @IBAction func toggleLockIconVisibility(sender: AnyObject) {
+        let menuItem = sender as! NSMenuItem
+        menuItem.state = menuItem.state == NSOnState ? NSOffState : NSOnState
+        isLockIconHiddenWhileLocked = menuItem.state == NSOnState
+    }
 
 	override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
 		return viewController.imageView.image != nil
