@@ -49,4 +49,8 @@ class MCWIndow: NSWindow {
 		animations.duration = 0.15
 		animations.start()
 	}
+
+    override func constrainFrameRect(_ frameRect: NSRect, to screen: NSScreen?) -> NSRect {
+        return frameRect
+    }
 }
