@@ -20,7 +20,7 @@
                 <p class="text-inverse">An intuitive app to display transparent images on screen.</p>
                 <br>
                 <br>
-                <a id="download-btn" href="https://github.com/yuhua-chen/LayerX/releases/latest" class="btn btn-lg btn-primary">Download</a>
+                <a id="download-btn" href="https://github.com/yuhua-chen/LayerX/releases/download/v1.2.0/LayerX.app.zip" class="btn btn-lg btn-primary">Download v1.2.0</a>
             </div>
         </div>
     </div>
@@ -207,15 +207,6 @@
 
           ga('create', 'UA-40663221-10', 'auto');
           ga('send', 'pageview');
-
-          $.get('https://api.github.com/repos/yuhua-chen/layerx/releases/latest', function(data) {
-            var name = data.name;
-            var link = data.assets[0].browser_download_url
-
-            if (link && name) {
-                $('#download-btn').attr('href', link).text("Download " + name);
-            }
-          });
 
         </script>
 </body></html>
