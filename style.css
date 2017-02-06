@@ -6779,3 +6779,16 @@ body {
 .style {
   line-height: 2em;
 }
+
+@media screen and (max-width: 1024px) {
+  .macbook img {
+    display: none;
+  }
+
+  .macbook iframe {
+    position: relative !important;
+    margin: 0 !important;
+    top: 0 !important;
+    width: 100%;
+  }
+}
