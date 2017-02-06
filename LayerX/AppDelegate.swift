@@ -14,10 +14,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	weak var window: MCWIndow!
 	weak var viewController: ViewController!
     var isLockIconHiddenWhileLocked = false {
-        didSet { viewController.lockIconImageView.hidden = window.movable || isLockIconHiddenWhileLocked }
+        didSet { viewController.lockIconImageView.isHidden = window.isMovable || isLockIconHiddenWhileLocked }
     }
 
-	func applicationDidFinishLaunching(aNotification: NSNotification) {
+	func applicationDidFinishLaunching(_ aNotification: Notification) {
 		if let window = NSApp.windows.first as? MCWIndow {
 			window.fitsWithSize(NSMakeSize(480, 320))
 			self.window = window
@@ -29,74 +29,74 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 extension AppDelegate {
 
-	@IBAction func actualSize(sender: AnyObject?) {
+	@IBAction func actualSize(_ sender: AnyObject?) {
 		let image = viewController.imageView.image!
 		window.resizeTo(image.size, animated: true)
 	}
 
-	@IBAction func makeLarger(sender: AnyObject) {
+	@IBAction func makeLarger(_ sender: AnyObject) {
 		var size = window.frame.size
 		size = size * 1.1
 		window.resizeTo(size, animated: true)
 	}
 
-	@IBAction func makeSmaller(sender: AnyObject) {
+	@IBAction func makeSmaller(_ sender: AnyObject) {
 		var size = window.frame.size
 		size = size * 0.9
 		window.resizeTo(size, animated: true)
 	}
 
-	@IBAction func makeLargerOnePixel(sender: AnyObject) {
+	@IBAction func makeLargerOnePixel(_ sender: AnyObject) {
 		var size = window.frame.size
 		size.width += 1
 		size.height += 1
 		window.resizeTo(size, animated: true)
 	}
 
-	@IBAction func makeSmallerOnePixel(sender: AnyObject) {
+	@IBAction func makeSmallerOnePixel(_ sender: AnyObject) {
 		var size = window.frame.size
 		size.width -= 1
 		size.height -= 1
 		window.resizeTo(size, animated: true)
 	}
 
-	@IBAction func increaseTransparency(sender: AnyObject) {
+	@IBAction func increaseTransparency(_ sender: AnyObject) {
 		var alpha = viewController.imageView.alphaValue
 		alpha -= 0.1
 		viewController.imageView.alphaValue = max(alpha, 0.05)
 	}
 
-	@IBAction func reduceTransparency(sender: AnyObject) {
+	@IBAction func reduceTransparency(_ sender: AnyObject) {
 		var alpha = viewController.imageView.alphaValue
 		alpha += 0.1
 		viewController.imageView.alphaValue = min(alpha, 1.0)
 	}
 
 	
-	@IBAction func toggleLockWindow(sender: AnyObject) {
+	@IBAction func toggleLockWindow(_ sender: AnyObject) {
 		let menuItem = sender as! NSMenuItem
 		if menuItem.title == "Lock" {
 			menuItem.title  = "Unlock"
-			window.movable = false
+			window.isMovable = false
 			window.ignoresMouseEvents = true
-			window.level = Int(CGWindowLevelForKey(.MaximumWindowLevelKey))
+			window.level = Int(CGWindowLevelForKey(.maximumWindow))
 		} else {
 			menuItem.title  = "Lock"
-			window.movable = true
+			window.isMovable = true
 			window.ignoresMouseEvents = false
-			window.level = Int(CGWindowLevelForKey(.NormalWindowLevelKey))
+			window.level = Int(CGWindowLevelForKey(.normalWindow))
 		}
 
-		viewController.lockIconImageView.hidden = window.movable || isLockIconHiddenWhileLocked
+		viewController.lockIconImageView.isHidden = window.isMovable || isLockIconHiddenWhileLocked
 	}
     
-    @IBAction func toggleLockIconVisibility(sender: AnyObject) {
+    @IBAction func toggleLockIconVisibility(_ sender: AnyObject) {
         let menuItem = sender as! NSMenuItem
         menuItem.state = menuItem.state == NSOnState ? NSOffState : NSOnState
         isLockIconHiddenWhileLocked = menuItem.state == NSOnState
     }
 
-	override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
+	override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
 		return viewController.imageView.image != nil
 	}
 }

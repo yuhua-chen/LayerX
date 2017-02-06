@@ -9,7 +9,7 @@
 import Cocoa
 
 protocol MCDragAndDropImageViewDelegate: class {
-	func dragAndDropImageViewDidDrop(imageView: MCDragAndDropImageView)
+	func dragAndDropImageViewDidDrop(_ imageView: MCDragAndDropImageView)
 }
 
 class MCDragAndDropImageView: NSImageView {
@@ -19,7 +19,7 @@ class MCDragAndDropImageView: NSImageView {
 	required init?(coder: NSCoder) {
 		super.init(coder: coder)
 
-		registerForDraggedTypes(NSImage.imageTypes())
+		register(forDraggedTypes: NSImage.imageTypes())
 
 		wantsLayer = true
 	}
@@ -29,15 +29,15 @@ class MCDragAndDropImageView: NSImageView {
 		super.setNeedsDisplay()
 	}
 
-	override func drawRect(dirtyRect: NSRect) {
-		super.drawRect(dirtyRect)
+	override func draw(_ dirtyRect: NSRect) {
+		super.draw(dirtyRect)
 
 		if let _ = image {
-			layer?.backgroundColor = NSColor.clearColor().CGColor
+			layer?.backgroundColor = NSColor.clear.cgColor
 			return
 		}
 
-		layer?.backgroundColor = NSColor(white: highlighted ? 0.5 : 0.8, alpha: 1.0).CGColor
+		layer?.backgroundColor = NSColor(white: isHighlighted ? 0.5 : 0.8, alpha: 1.0).cgColor
 	}
 
 	override var mouseDownCanMoveWindow:Bool {
@@ -49,40 +49,40 @@ class MCDragAndDropImageView: NSImageView {
 
 extension MCDragAndDropImageView: NSDraggingSource {
 
-	override func draggingEntered(sender: NSDraggingInfo) -> NSDragOperation {
+	override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
 
-		if (NSImage.canInitWithPasteboard(sender.draggingPasteboard())) {
-			highlighted = true
+		if (NSImage.canInit(with: sender.draggingPasteboard())) {
+			isHighlighted = true
 
 			setNeedsDisplay()
 
 			let sourceDragMask = sender.draggingSourceOperationMask()
 			let pboard = sender.draggingPasteboard()
 
-			if pboard.availableTypeFromArray([NSFilenamesPboardType]) == NSFilenamesPboardType {
-				if sourceDragMask.rawValue & NSDragOperation.Copy.rawValue != 0 {
-					return NSDragOperation.Copy
+			if pboard.availableType(from: [NSFilenamesPboardType]) == NSFilenamesPboardType {
+				if sourceDragMask.rawValue & NSDragOperation.copy.rawValue != 0 {
+					return NSDragOperation.copy
 				}
 			}
 		}
 
-		return .None
+		return NSDragOperation()
 	}
 
-	override func draggingExited(sender: NSDraggingInfo?) {
-		highlighted = false
+	override func draggingExited(_ sender: NSDraggingInfo?) {
+		isHighlighted = false
 		setNeedsDisplay()
 	}
 
-	override func prepareForDragOperation(sender: NSDraggingInfo) -> Bool {
-		highlighted = false
+	override func prepareForDragOperation(_ sender: NSDraggingInfo) -> Bool {
+		isHighlighted = false
 		setNeedsDisplay()
 
-		return NSImage.canInitWithPasteboard(sender.draggingPasteboard())
+		return NSImage.canInit(with: sender.draggingPasteboard())
 	}
 
-	override func performDragOperation(sender: NSDraggingInfo) -> Bool {
-		if (NSImage.canInitWithPasteboard(sender.draggingPasteboard())) {
+	override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
+		if (NSImage.canInit(with: sender.draggingPasteboard())) {
 			image = NSImage(pasteboard: sender.draggingPasteboard())
 			delegate?.dragAndDropImageViewDidDrop(self)
 			setNeedsDisplay()
@@ -91,10 +91,10 @@ extension MCDragAndDropImageView: NSDraggingSource {
 		return true
 	}
 
-	func draggingSession(session: NSDraggingSession, sourceOperationMaskForDraggingContext context: NSDraggingContext) -> NSDragOperation {
+	func draggingSession(_ session: NSDraggingSession, sourceOperationMaskFor context: NSDraggingContext) -> NSDragOperation {
 		switch context {
-		case .OutsideApplication: return .None
-		case .WithinApplication: return .Copy
+		case .outsideApplication: return NSDragOperation()
+		case .withinApplication: return .copy
 		}
 	}
 }

@@ -20,12 +20,12 @@ class ViewController: NSViewController {
 	}
 
 	lazy var trackingArea: NSTrackingArea = {
-		let options: NSTrackingAreaOptions = [.ActiveAlways, .MouseEnteredAndExited]
+		let options: NSTrackingAreaOptions = [.activeAlways, .mouseEnteredAndExited]
 		return NSTrackingArea(rect: self.view.bounds, options: options, owner: self, userInfo: nil)
 	}()
 
 	deinit {
-		NSNotificationCenter.defaultCenter().removeObserver(self)
+		NotificationCenter.default.removeObserver(self)
 	}
 
 	required init?(coder: NSCoder) {
@@ -42,34 +42,34 @@ class ViewController: NSViewController {
 		sizeTextField.layer?.masksToBounds = true
 
 		lockIconImageView.wantsLayer = true
-		lockIconImageView.layer?.backgroundColor = NSColor(white: 0.0, alpha: 0.5).CGColor
+		lockIconImageView.layer?.backgroundColor = NSColor(white: 0.0, alpha: 0.5).cgColor
 		lockIconImageView.layer?.cornerRadius = 5
 		lockIconImageView.layer?.masksToBounds = true
 
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: "windowDidResize:", name: NSWindowDidResizeNotification, object: appDelegate().window)
+		NotificationCenter.default.addObserver(self, selector: #selector(NSWindowDelegate.windowDidResize(_:)), name: NSNotification.Name.NSWindowDidResize, object: appDelegate().window)
 
 		view.addTrackingArea(trackingArea)
 	}
 
 	func fadeOutSizeTextField() {
 		let transition = CATransition()
-		sizeTextField.layer?.addAnimation(transition, forKey: "fadeOut")
+		sizeTextField.layer?.add(transition, forKey: "fadeOut")
 		sizeTextField.layer?.opacity = 0
 	}
 
-	func windowDidResize(notification: NSNotification) {
+	func windowDidResize(_ notification: Notification) {
 		let window = notification.object as! NSWindow
 		let size = window.frame.size
 		sizeTextField.stringValue = "\(Int(size.width))x\(Int(size.height))"
 		sizeTextField.layer?.opacity = 1
 
-		NSObject.cancelPreviousPerformRequestsWithTarget(self, selector: "fadeOutSizeTextField", object: nil)
-		performSelector("fadeOutSizeTextField", withObject: nil, afterDelay: 2)
+		NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(ViewController.fadeOutSizeTextField), object: nil)
+		perform(#selector(ViewController.fadeOutSizeTextField), with: nil, afterDelay: 2)
 	}
 
 	// MARK: Mouse events
 
-	override func scrollWheel(theEvent: NSEvent) {
+	override func scrollWheel(with theEvent: NSEvent) {
 		guard let _ = imageView.image else { return }
 
 		let delta = theEvent.deltaY * 0.005;
@@ -79,11 +79,11 @@ class ViewController: NSViewController {
 		imageView.alphaValue = alpha
 	}
 
-	override func mouseEntered(theEvent: NSEvent) {
+	override func mouseEntered(with theEvent: NSEvent) {
 		sizeTextField.layer?.opacity = 1
 	}
 
-	override func mouseExited(theEvent: NSEvent) {
+	override func mouseExited(with theEvent: NSEvent) {
 		fadeOutSizeTextField()
 	}
 }
@@ -91,10 +91,10 @@ class ViewController: NSViewController {
 // MARK: - MCDragAndDropImageViewDelegate
 
 extension ViewController: MCDragAndDropImageViewDelegate {
-	func dragAndDropImageViewDidDrop(imageView: MCDragAndDropImageView) {
+	func dragAndDropImageViewDidDrop(_ imageView: MCDragAndDropImageView) {
 
-		sizeTextField.hidden = false
-		placeholderTextField.hidden = true
+		sizeTextField.isHidden = false
+		placeholderTextField.isHidden = true
 
 		appDelegate().actualSize(nil)
 	}

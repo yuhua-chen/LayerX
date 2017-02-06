@@ -10,14 +10,14 @@ import Cocoa
 
 class MCWIndow: NSWindow {
 	override func awakeFromNib() {
-		styleMask = NSBorderlessWindowMask | NSResizableWindowMask
-		opaque = false
-		backgroundColor = NSColor.clearColor()
-		movableByWindowBackground = true
+		styleMask = [NSBorderlessWindowMask, NSResizableWindowMask]
+		isOpaque = false
+		backgroundColor = NSColor.clear
+		isMovableByWindowBackground = true
 		hasShadow = false
 	}
 
-	func fitsWithSize(size: NSSize) {
+	func fitsWithSize(_ size: NSSize) {
 		var frame = self.frame
 		if frame.size.width < size.width || frame.size.height < size.height {
 			frame.size = size
@@ -25,7 +25,7 @@ class MCWIndow: NSWindow {
 		}
 	}
 
-	func resizeTo(size: NSSize, animated: Bool) {
+	func resizeTo(_ size: NSSize, animated: Bool) {
 		var frame = self.frame
 		frame.size = size
 
@@ -36,9 +36,9 @@ class MCWIndow: NSWindow {
 
 		let resizeAnimation = [NSViewAnimationTargetKey: self, NSViewAnimationEndFrameKey: NSValue(rect: frame)]
 		let animations = NSViewAnimation(viewAnimations: [resizeAnimation])
-		animations.animationBlockingMode = .Blocking
-		animations.animationCurve = .EaseInOut
+		animations.animationBlockingMode = .blocking
+		animations.animationCurve = .easeInOut
 		animations.duration = 0.15
-		animations.startAnimation()
+		animations.start()
 	}
 }
