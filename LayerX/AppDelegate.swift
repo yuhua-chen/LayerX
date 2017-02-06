@@ -104,7 +104,6 @@ extension AppDelegate {
 
     @IBAction func moveAround(_ sender: AnyObject) {
         let menuItem = sender as! NSMenuItem
-        NSLog("tag: \(menuItem.tag)")
 
         guard let arrow = ArrowTag(rawValue: menuItem.tag) else {
             return
