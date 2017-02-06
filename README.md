@@ -29,6 +29,9 @@ Support Mac OS X 10.10 or later.
 |`^ ⌘ -`| Scale down 1px.|
 
 ### Move (Arrow keys)
+
+| Key | Action |
+|:---|:---|
 |`↑`| Move up 1px.|
 |`←`| Move left 1px.|
 |`→`| Move right 1px.|
