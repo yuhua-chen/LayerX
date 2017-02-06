@@ -17,6 +17,14 @@ class MCWIndow: NSWindow {
 		hasShadow = false
 	}
 
+    func moveBy(_ offset: CGPoint) {
+        var frame = self.frame
+        frame.origin.x += offset.x
+        frame.origin.y += offset.y
+
+        setFrame(frame, display: true)
+    }
+
 	func fitsWithSize(_ size: NSSize) {
 		var frame = self.frame
 		if frame.size.width < size.width || frame.size.height < size.height {

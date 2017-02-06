@@ -25,6 +25,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 }
 
+fileprivate enum ArrowTag: Int {
+    case up = 20
+    case left = 21
+    case right = 22
+    case down = 23
+}
+
 // MARK: - Hotkeys
 
 extension AppDelegate {
@@ -71,7 +78,6 @@ extension AppDelegate {
 		alpha += 0.1
 		viewController.imageView.alphaValue = min(alpha, 1.0)
 	}
-
 	
 	@IBAction func toggleLockWindow(_ sender: AnyObject) {
 		let menuItem = sender as! NSMenuItem
@@ -94,6 +100,26 @@ extension AppDelegate {
         let menuItem = sender as! NSMenuItem
         menuItem.state = menuItem.state == NSOnState ? NSOffState : NSOnState
         isLockIconHiddenWhileLocked = menuItem.state == NSOnState
+    }
+
+    @IBAction func moveAround(_ sender: AnyObject) {
+        let menuItem = sender as! NSMenuItem
+        NSLog("tag: \(menuItem.tag)")
+
+        guard let arrow = ArrowTag(rawValue: menuItem.tag) else {
+            return
+        }
+
+        switch arrow {
+        case .up:
+            window.moveBy(CGPoint(x: 0, y: 1))
+        case .left:
+            window.moveBy(CGPoint(x: -1, y: 0))
+        case .right:
+            window.moveBy(CGPoint(x: 1, y: 0))
+        case .down:
+            window.moveBy(CGPoint(x: 0, y: -1))
+        }
     }
 
 	override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {

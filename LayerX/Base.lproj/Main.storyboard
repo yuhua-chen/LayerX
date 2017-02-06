@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15C50" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -150,6 +150,31 @@
                                                 <action selector="makeSmallerOnePixel:" target="Voe-Tx-rLC" id="lBc-iQ-i2i"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="S7H-4j-wWG"/>
+                                        <menuItem title="Move up 1px" tag="20" keyEquivalent="" id="xt1-zP-8lE">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="moveAround:" target="Voe-Tx-rLC" id="qks-64-WYp"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Move left 1px" tag="21" keyEquivalent="" id="Ud7-FA-vtA">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="moveAround:" target="Voe-Tx-rLC" id="RxY-3b-ZPJ"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Move right 1px" tag="22" keyEquivalent="" id="SC9-Za-3te">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="moveAround:" target="Voe-Tx-rLC" id="7UQ-dw-xVi"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Move down 1px" tag="23" keyEquivalent="" id="T88-KV-33B">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="moveAround:" target="Voe-Tx-rLC" id="gZw-Fh-AIF"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="Uol-cd-eOj"/>
                                         <menuItem title="Increase Transparency" keyEquivalent="j" id="PLz-nj-Geg">
                                             <connections>
@@ -294,6 +319,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="lock" width="16" height="16"/>
+        <image name="lock" width="32" height="32"/>
     </resources>
 </document>
