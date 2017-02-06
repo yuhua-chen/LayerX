@@ -208,5 +208,9 @@
           ga('create', 'UA-40663221-10', 'auto');
           ga('send', 'pageview');
 
+          $('#download-btn').on('click', function() {
+            ga('send', 'event', 'Button', 'download', 'v1.2.0');
+          });
+
         </script>
 </body></html>
