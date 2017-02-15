@@ -22,7 +22,7 @@ Support Mac OS X 10.10 or later.
 
 | Key | Action |
 |:---|:---|
-|`⌘ 0`| Acutal image size.|
+|`⌘ 0`| Actual image size.|
 |`⌘ +`| Scale up 10%.|
 |`⌘ -`| Scale down 10%.|
 |`^ ⌘ +`| Scale up 1px.|
