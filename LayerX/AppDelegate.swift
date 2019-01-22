@@ -16,6 +16,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var isLockIconHiddenWhileLocked = false {
         didSet { viewController.lockIconImageView.isHidden = window.isMovable || isLockIconHiddenWhileLocked }
     }
+    var isSizeHidden = false {
+        didSet { viewController.sizeTextField.isHidden = isSizeHidden }
+    }
 
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
 		if let window = NSApp.windows.first as? MCWIndow {
@@ -100,6 +103,12 @@ extension AppDelegate {
         let menuItem = sender as! NSMenuItem
         menuItem.state = menuItem.state == NSOnState ? NSOffState : NSOnState
         isLockIconHiddenWhileLocked = menuItem.state == NSOnState
+    }
+
+    @IBAction func toggleSizeVisibility(_ sender: AnyObject) {
+        let menuItem = sender as! NSMenuItem
+        menuItem.state = menuItem.state == NSOnState ? NSOffState : NSOnState
+        isSizeHidden = menuItem.state == NSOnState
     }
 
     @IBAction func moveAround(_ sender: AnyObject) {

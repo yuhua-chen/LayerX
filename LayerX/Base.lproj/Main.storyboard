@@ -193,6 +193,12 @@
                                                 <action selector="toggleLockIconVisibility:" target="Voe-Tx-rLC" id="RCB-nJ-o0E"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Hide Size" id="JXi-GL-qzz">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="toggleSizeVisibility:" target="Voe-Tx-rLC" id="e8c-Wd-zRh"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>
@@ -247,6 +253,9 @@
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="515" y="487" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <connections>
+                            <outlet property="delegate" destination="B8D-0N-5wS" id="Ikp-UW-Prj"/>
+                        </connections>
                     </window>
                     <connections>
                         <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
