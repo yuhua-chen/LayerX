@@ -88,12 +88,12 @@ extension AppDelegate {
 			menuItem.title  = "Unlock"
 			window.isMovable = false
 			window.ignoresMouseEvents = true
-			window.level = Int(CGWindowLevelForKey(.maximumWindow))
+			window.level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.maximumWindow)))
 		} else {
 			menuItem.title  = "Lock"
 			window.isMovable = true
 			window.ignoresMouseEvents = false
-			window.level = Int(CGWindowLevelForKey(.normalWindow))
+			window.level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.normalWindow)))
 		}
 
 		viewController.lockIconImageView.isHidden = window.isMovable || isLockIconHiddenWhileLocked
@@ -101,14 +101,14 @@ extension AppDelegate {
     
     @IBAction func toggleLockIconVisibility(_ sender: AnyObject) {
         let menuItem = sender as! NSMenuItem
-        menuItem.state = menuItem.state == NSOnState ? NSOffState : NSOnState
-        isLockIconHiddenWhileLocked = menuItem.state == NSOnState
+        menuItem.state = menuItem.state == .on ? .off : .on
+        isLockIconHiddenWhileLocked = menuItem.state == .on
     }
 
     @IBAction func toggleSizeVisibility(_ sender: AnyObject) {
         let menuItem = sender as! NSMenuItem
-        menuItem.state = menuItem.state == NSOnState ? NSOffState : NSOnState
-        isSizeHidden = menuItem.state == NSOnState
+        menuItem.state = menuItem.state == .on ? .off : .on
+        isSizeHidden = menuItem.state == .on
     }
 
     @IBAction func moveAround(_ sender: AnyObject) {
@@ -130,7 +130,7 @@ extension AppDelegate {
         }
     }
 
-	override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+	func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
 		return viewController.imageView.image != nil
 	}
 }
