@@ -211,6 +211,11 @@
                                                 <action selector="toggleLockWindow:" target="Voe-Tx-rLC" id="Mfc-bV-lDx"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Keep on top" keyEquivalent="t" id="WZF-Ql-Ptb">
+                                            <connections>
+                                                <action selector="toggleOnTop:" target="Voe-Tx-rLC" id="1mS-lL-oZG"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
                                         <menuItem title="Bring All to Front" id="LE2-aR-0XJ">
                                             <modifierMask key="keyEquivalentModifierMask"/>

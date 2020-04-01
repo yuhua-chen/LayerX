@@ -10,6 +10,8 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+    var locked = false
+    var onTop = false
 
 	weak var window: MCWIndow!
 	weak var viewController: ViewController!
@@ -84,7 +86,9 @@ extension AppDelegate {
 	
 	@IBAction func toggleLockWindow(_ sender: AnyObject) {
 		let menuItem = sender as! NSMenuItem
-		if menuItem.title == "Lock" {
+        locked = !locked
+        onTop = locked
+		if locked {
 			menuItem.title  = "Unlock"
 			window.isMovable = false
 			window.ignoresMouseEvents = true
@@ -98,6 +102,18 @@ extension AppDelegate {
 
 		viewController.lockIconImageView.isHidden = window.isMovable || isLockIconHiddenWhileLocked
 	}
+    
+    @IBAction func toggleOnTop(_ sender: AnyObject) {
+        let menuItem = sender as! NSMenuItem
+        onTop = !onTop
+        if onTop {
+            menuItem.title = "Don't keep on top"
+            window.level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.maximumWindow)))
+        } else if !locked {
+            menuItem.title = "Keep on top"
+            window.level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.normalWindow)))
+        }
+    }
     
     @IBAction func toggleLockIconVisibility(_ sender: AnyObject) {
         let menuItem = sender as! NSMenuItem
