@@ -48,6 +48,7 @@ Support Mac OS X 10.10 or later.
 
 |Key|Action|
 |:---|:---|
+|`⌘ A`| Keep window on all spaces.|
 |`⌘ L`| Lock images and make window always on top.|
 
 # Mouse events

@@ -10,6 +10,7 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+	var allSpaces = false
 
 	weak var window: MCWIndow!
 	weak var viewController: ViewController!
@@ -23,6 +24,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
 		if let window = NSApp.windows.first as? MCWIndow {
 			window.fitsWithSize(NSMakeSize(480, 320))
+			window.collectionBehavior = [.managed, .moveToActiveSpace]
 			self.window = window
 		}
 	}
@@ -129,6 +131,17 @@ extension AppDelegate {
             window.moveBy(CGPoint(x: 0, y: -1))
         }
     }
+	@IBAction func toggleAllSpaces(_ sender: AnyObject) {
+		let menuItem = sender as! NSMenuItem
+		allSpaces = !allSpaces
+		if allSpaces {
+			menuItem.title = "Keep on this space"
+			window.collectionBehavior = [.canJoinAllSpaces]
+		} else {
+			menuItem.title = "Keep on all spaces"
+			window.collectionBehavior = [.managed, .moveToActiveSpace]
+		}
+	}
 
 	override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
 		return viewController.imageView.image != nil
