@@ -22,7 +22,7 @@ Support Mac OS X 10.10 or later.
 
 | Key | Action |
 |:--- |:---    |
-|`⌘ V`| Paste image from clipboard. |
+|`⌘ V`| Paste image or file from clipboard. |
 
 ### Scale
 
