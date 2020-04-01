@@ -81,6 +81,42 @@ extension AppDelegate {
 		alpha += 0.1
 		viewController.imageView.alphaValue = min(alpha, 1.0)
 	}
+    
+    func getPasteboardImage() -> NSImage? {
+        let pasteboard = NSPasteboard.general;
+        let file = pasteboard.data(forType: NSPasteboard.PasteboardType.fileURL)
+        if file != nil {
+            let str = String(data: file!, encoding: .utf8)
+            let url = URL(string: str!)
+            let image = NSImage(contentsOf: url!)
+            if image != nil {
+                return image
+            }
+        }
+
+        let tiff = pasteboard.data(forType: NSPasteboard.PasteboardType.tiff)
+        if tiff != nil {
+            return NSImage(data: tiff!)
+        }
+      
+        let png = pasteboard.data(forType: NSPasteboard.PasteboardType.png)
+        if png != nil {
+            return NSImage(data: png!)
+        }
+
+        return nil
+    }
+    
+    @IBAction func paste(_ sender: AnyObject) {
+        guard let image = getPasteboardImage() else { return }
+        let rep = image.representations[0]
+        viewController.imageView.image = image
+        let size = NSMakeSize(CGFloat(rep.pixelsWide), CGFloat(rep.pixelsHigh))
+        window.resizeTo(size, animated: true)
+        viewController.sizeTextField.isHidden = false
+        viewController.placeholderTextField.isHidden = true
+
+    }
 	
 	@IBAction func toggleLockWindow(_ sender: AnyObject) {
 		let menuItem = sender as! NSMenuItem

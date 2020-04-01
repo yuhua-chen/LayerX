@@ -119,6 +119,18 @@
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="Edit" id="dMs-cI-mzQ">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Edit" id="bib-Uj-vzu">
+                                    <items>
+                                        <menuItem title="Paste" keyEquivalent="v" id="DVo-aG-piG">
+                                            <connections>
+                                                <action selector="paste:" target="Voe-Tx-rLC" id="mh3-X2-sMC"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                             <menuItem title="View" id="H8h-7b-M4v">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="View" id="HyV-fh-RgO">
