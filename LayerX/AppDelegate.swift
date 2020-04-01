@@ -86,12 +86,9 @@ extension AppDelegate {
         let pasteboard = NSPasteboard.general;
         let file = pasteboard.data(forType: NSPasteboard.PasteboardType.fileURL)
         if file != nil {
-            let str = String(data: file!, encoding: .utf8)
-            let url = URL(string: str!)
-            let image = NSImage(contentsOf: url!)
-            if image != nil {
-                return image
-            }
+            guard let str = String(data: file!, encoding: .utf8) else { return nil }
+            guard let url = URL(string: str) else { return nil }
+            return NSImage(contentsOf: url)
         }
 
         let tiff = pasteboard.data(forType: NSPasteboard.PasteboardType.tiff)

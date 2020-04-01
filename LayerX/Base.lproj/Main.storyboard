@@ -119,11 +119,11 @@
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem title="Edit" id="dMs-cI-mzQ">
+                            <menuItem title="Edit" id="dAm-Da-fWl">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Edit" id="bib-Uj-vzu">
+                                <menu key="submenu" title="Edit" id="aeY-sH-oUd">
                                     <items>
-                                        <menuItem title="Paste" keyEquivalent="v" id="DVo-aG-piG">
+                                        <menuItem title="Paste" keyEquivalent="v" id="Wup-uR-bUt">
                                             <connections>
                                                 <action selector="paste:" target="Voe-Tx-rLC" id="mh3-X2-sMC"/>
                                             </connections>
