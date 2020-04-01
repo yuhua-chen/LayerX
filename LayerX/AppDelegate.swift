@@ -84,21 +84,19 @@ extension AppDelegate {
     
     func getPasteboardImage() -> NSImage? {
         let pasteboard = NSPasteboard.general;
-        let file = pasteboard.data(forType: NSPasteboard.PasteboardType.fileURL)
-        if file != nil {
-            guard let str = String(data: file!, encoding: .utf8) else { return nil }
-            guard let url = URL(string: str) else { return nil }
+        if let file = pasteboard.data(forType: NSPasteboard.PasteboardType.fileURL),
+           let str = String(data: file, encoding: .utf8),
+           let url = URL(string: str)
+        {
             return NSImage(contentsOf: url)
         }
 
-        let tiff = pasteboard.data(forType: NSPasteboard.PasteboardType.tiff)
-        if tiff != nil {
-            return NSImage(data: tiff!)
+        if let tiff = pasteboard.data(forType: NSPasteboard.PasteboardType.tiff) {
+            return NSImage(data: tiff)
         }
-      
-        let png = pasteboard.data(forType: NSPasteboard.PasteboardType.png)
-        if png != nil {
-            return NSImage(data: png!)
+
+        if let png = pasteboard.data(forType: NSPasteboard.PasteboardType.png) {
+            return NSImage(data: png)
         }
 
         return nil
