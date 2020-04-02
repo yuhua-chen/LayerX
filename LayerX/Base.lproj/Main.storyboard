@@ -119,6 +119,18 @@
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="Edit" id="dAm-Da-fWl">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Edit" id="aeY-sH-oUd">
+                                    <items>
+                                        <menuItem title="Paste" keyEquivalent="v" id="Wup-uR-bUt">
+                                            <connections>
+                                                <action selector="paste:" target="Voe-Tx-rLC" id="mh3-X2-sMC"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                             <menuItem title="View" id="H8h-7b-M4v">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="View" id="HyV-fh-RgO">
@@ -209,6 +221,11 @@
                                         <menuItem title="Lock" keyEquivalent="l" id="OY7-WF-poV">
                                             <connections>
                                                 <action selector="toggleLockWindow:" target="Voe-Tx-rLC" id="Mfc-bV-lDx"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Keep on top" keyEquivalent="t" id="WZF-Ql-Ptb">
+                                            <connections>
+                                                <action selector="toggleOnTop:" target="Voe-Tx-rLC" id="1mS-lL-oZG"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Keep on all spaces" keyEquivalent="a" id="pZ0-jf-Hps">

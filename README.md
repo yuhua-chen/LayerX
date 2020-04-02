@@ -7,7 +7,7 @@ An intuitive app to display transparent images on screen.
 # System requirements
 
 Support Mac OS X 10.10 or later.
- 
+
 # Features
 
 - [x] Drag and drop images
@@ -17,6 +17,12 @@ Support Mac OS X 10.10 or later.
 - [X] Aspect ratio scaling
 
 # Keyboard Shortcuts
+
+### Set image
+
+| Key | Action |
+|:--- |:---    |
+|`⌘ V`| Paste image or file from clipboard. |
 
 ### Scale
 
@@ -48,8 +54,9 @@ Support Mac OS X 10.10 or later.
 
 |Key|Action|
 |:---|:---|
-|`⌘ A`| Keep window on all spaces.|
 |`⌘ L`| Lock images and make window always on top.|
+|`⌘ T`| Make window always on top.|
+|`⌘ A`| Keep window on all spaces.|
 
 # Mouse events
 

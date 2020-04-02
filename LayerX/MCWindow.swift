@@ -10,7 +10,7 @@ import Cocoa
 
 class MCWIndow: NSWindow {
 	override func awakeFromNib() {
-		styleMask = [NSBorderlessWindowMask, NSResizableWindowMask]
+		styleMask = [.borderless, .resizable]
 		isOpaque = false
 		backgroundColor = NSColor.clear
 		isMovableByWindowBackground = true
@@ -42,7 +42,7 @@ class MCWIndow: NSWindow {
 			return
 		}
 
-		let resizeAnimation = [NSViewAnimationTargetKey: self, NSViewAnimationEndFrameKey: NSValue(rect: frame)]
+		let resizeAnimation = [NSViewAnimation.Key.target: self, NSViewAnimation.Key.endFrame: NSValue(rect: frame)]
 		let animations = NSViewAnimation(viewAnimations: [resizeAnimation])
 		animations.animationBlockingMode = .blocking
 		animations.animationCurve = .easeInOut
