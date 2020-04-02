@@ -19,7 +19,7 @@ class MCDragAndDropImageView: NSImageView {
 	required init?(coder: NSCoder) {
 		super.init(coder: coder)
 
-		register(forDraggedTypes: NSImage.imageTypes())
+		registerForDraggedTypes(NSImage.imageTypes.map(NSPasteboard.PasteboardType.init(rawValue:)))
 
 		wantsLayer = true
 	}
@@ -51,15 +51,15 @@ extension MCDragAndDropImageView: NSDraggingSource {
 
 	override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
 
-		if (NSImage.canInit(with: sender.draggingPasteboard())) {
+		if (NSImage.canInit(with: sender.draggingPasteboard)) {
 			isHighlighted = true
 
 			setNeedsDisplay()
 
-			let sourceDragMask = sender.draggingSourceOperationMask()
-			let pboard = sender.draggingPasteboard()
+			let sourceDragMask = sender.draggingSourceOperationMask
+			let pboard = sender.draggingPasteboard
 
-			if pboard.availableType(from: [NSFilenamesPboardType]) == NSFilenamesPboardType {
+			if pboard.availableType(from: [.fileURL]) == .fileURL {
 				if sourceDragMask.rawValue & NSDragOperation.copy.rawValue != 0 {
 					return NSDragOperation.copy
 				}
@@ -78,12 +78,12 @@ extension MCDragAndDropImageView: NSDraggingSource {
 		isHighlighted = false
 		setNeedsDisplay()
 
-		return NSImage.canInit(with: sender.draggingPasteboard())
+		return NSImage.canInit(with: sender.draggingPasteboard)
 	}
 
 	override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
-		if (NSImage.canInit(with: sender.draggingPasteboard())) {
-			image = NSImage(pasteboard: sender.draggingPasteboard())
+		if (NSImage.canInit(with: sender.draggingPasteboard)) {
+			image = NSImage(pasteboard: sender.draggingPasteboard)
 			delegate?.dragAndDropImageViewDidDrop(self)
 			setNeedsDisplay()
 		}
@@ -95,6 +95,7 @@ extension MCDragAndDropImageView: NSDraggingSource {
 		switch context {
 		case .outsideApplication: return NSDragOperation()
 		case .withinApplication: return .copy
+		@unknown default: return NSDragOperation()
 		}
 	}
 }
