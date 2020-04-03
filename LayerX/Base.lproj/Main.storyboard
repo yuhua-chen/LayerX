@@ -228,6 +228,11 @@
                                                 <action selector="toggleOnTop:" target="Voe-Tx-rLC" id="1mS-lL-oZG"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Keep on all spaces" keyEquivalent="a" id="pZ0-jf-Hps">
+                                            <connections>
+                                                <action selector="toggleAllSpaces:" target="Voe-Tx-rLC" id="N0L-4A-TpV"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
                                         <menuItem title="Bring All to Front" id="LE2-aR-0XJ">
                                             <modifierMask key="keyEquivalentModifierMask"/>
