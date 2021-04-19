@@ -140,12 +140,12 @@
                                                 <action selector="actualSize:" target="Voe-Tx-rLC" id="Rr0-Sv-VSe"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Scale Up" keyEquivalent="+" id="Ed8-Vk-OS6">
+                                        <menuItem title="Scale Up 10%" keyEquivalent="+" id="Ed8-Vk-OS6">
                                             <connections>
                                                 <action selector="makeLarger:" target="Voe-Tx-rLC" id="ldh-JS-1g5"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Scale Down" keyEquivalent="-" id="trE-Hj-Y6i">
+                                        <menuItem title="Scale Down 10%" keyEquivalent="-" id="trE-Hj-Y6i">
                                             <connections>
                                                 <action selector="makeSmaller:" target="Voe-Tx-rLC" id="gWX-vc-gSr"/>
                                             </connections>

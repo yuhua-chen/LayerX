@@ -10,7 +10,9 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+
 	private let defaultSize = NSMakeSize(480, 320)
+	private let resizeStep: CGFloat = 0.1
 
 	var allSpaces = false
 	var locked = false
@@ -45,35 +47,38 @@ fileprivate enum ArrowTag: Int {
 
 extension AppDelegate {
 
+	private var originalSize: NSSize {
+		viewController.imageView.image?.size ?? defaultSize
+	}
+
+	private func resizeAspectFit(calculator: (_ original: CGFloat, _ current: CGFloat) -> CGFloat) {
+		let originalSize = self.originalSize
+		let width = calculator(originalSize.width, window.frame.size.width)
+		let height = width / originalSize.width * originalSize.height
+
+		if width > 0 {
+			window.resizeTo(NSSize(width: width, height: height), animated: true)
+		}
+	}
+
 	@IBAction func actualSize(_ sender: AnyObject?) {
-		let size = viewController.imageView.image?.size ?? defaultSize
-		window.resizeTo(size, animated: true)
+		window.resizeTo(originalSize, animated: true)
 	}
 
 	@IBAction func makeLarger(_ sender: AnyObject) {
-		var size = window.frame.size
-		size = size * 1.1
-		window.resizeTo(size, animated: true)
+		resizeAspectFit { $0 * ($1 / $0 + resizeStep) }
 	}
 
 	@IBAction func makeSmaller(_ sender: AnyObject) {
-		var size = window.frame.size
-		size = size * 0.9
-		window.resizeTo(size, animated: true)
+		resizeAspectFit { $0 * ($1 / $0 - resizeStep) }
 	}
 
 	@IBAction func makeLargerOnePixel(_ sender: AnyObject) {
-		var size = window.frame.size
-		size.width += 1
-		size.height += 1
-		window.resizeTo(size, animated: true)
+		resizeAspectFit { $1 + 1 }
 	}
 
 	@IBAction func makeSmallerOnePixel(_ sender: AnyObject) {
-		var size = window.frame.size
-		size.width -= 1
-		size.height -= 1
-		window.resizeTo(size, animated: true)
+		resizeAspectFit { $1 - 1 }
 	}
 
 	@IBAction func increaseTransparency(_ sender: AnyObject) {
@@ -202,8 +207,4 @@ extension AppDelegate {
 
 func appDelegate() -> AppDelegate {
 	return NSApp.delegate as! AppDelegate
-}
-
-func *(size: NSSize, scale: CGFloat) -> NSSize {
-	return NSMakeSize(size.width * scale, size.height * scale)
 }
