@@ -10,6 +10,8 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+	private let defaultSize = NSMakeSize(480, 320)
+
 	var allSpaces = false
 	var locked = false
 	var onTop = false
@@ -25,7 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
 		if let window = NSApp.windows.first as? MCWIndow {
-			window.fitsWithSize(NSMakeSize(480, 320))
+			window.fitsWithSize(defaultSize)
 			window.collectionBehavior = [.managed, .moveToActiveSpace]
 			self.window = window
 		}
@@ -44,8 +46,8 @@ fileprivate enum ArrowTag: Int {
 extension AppDelegate {
 
 	@IBAction func actualSize(_ sender: AnyObject?) {
-		let image = viewController.imageView.image!
-		window.resizeTo(image.size, animated: true)
+		let size = viewController.imageView.image?.size ?? defaultSize
+		window.resizeTo(size, animated: true)
 	}
 
 	@IBAction func makeLarger(_ sender: AnyObject) {
