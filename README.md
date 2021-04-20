@@ -42,6 +42,10 @@ Support Mac OS X 10.10 or later.
 |`←`| Move left 1px.|
 |`→`| Move right 1px.|
 |`↓`| Move down 1px.|
+|`Shift ↑`| Move up 10px.|
+|`Shift ←`| Move left 10px.|
+|`Shift →`| Move right 10px.|
+|`Shift ↓`| Move down 10px.|
 
 ### Alpha
 
