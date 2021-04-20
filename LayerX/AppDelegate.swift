@@ -174,15 +174,17 @@ extension AppDelegate {
 			return
 		}
 
+		let offset = menuItem.isAlternate ? 10 : 1
+
 		switch arrow {
 		case .up:
-			window.moveBy(CGPoint(x: 0, y: 1))
+			window.moveBy(CGPoint(x: 0, y: offset))
 		case .left:
-			window.moveBy(CGPoint(x: -1, y: 0))
+			window.moveBy(CGPoint(x: -offset, y: 0))
 		case .right:
-			window.moveBy(CGPoint(x: 1, y: 0))
+			window.moveBy(CGPoint(x: offset, y: 0))
 		case .down:
-			window.moveBy(CGPoint(x: 0, y: -1))
+			window.moveBy(CGPoint(x: 0, y: -offset))
 		}
 	}
 

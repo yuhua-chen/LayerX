@@ -169,10 +169,22 @@
                                                 <action selector="moveAround:" target="Voe-Tx-rLC" id="qks-64-WYp"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Move up 10px" tag="20" alternate="YES" keyEquivalent="" id="Zz2-NY-etK">
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
+                                            <connections>
+                                                <action selector="moveAround:" target="Voe-Tx-rLC" id="VjL-oF-pX5"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem title="Move left 1px" tag="21" keyEquivalent="" id="Ud7-FA-vtA">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="moveAround:" target="Voe-Tx-rLC" id="RxY-3b-ZPJ"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Move left 10px" tag="21" alternate="YES" keyEquivalent="" id="DDn-Bf-B7u">
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
+                                            <connections>
+                                                <action selector="moveAround:" target="Voe-Tx-rLC" id="Co3-jl-a9D"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Move right 1px" tag="22" keyEquivalent="" id="SC9-Za-3te">
@@ -181,10 +193,22 @@
                                                 <action selector="moveAround:" target="Voe-Tx-rLC" id="7UQ-dw-xVi"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Move right 10px" tag="22" alternate="YES" keyEquivalent="" id="nfz-Lb-qzf">
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
+                                            <connections>
+                                                <action selector="moveAround:" target="Voe-Tx-rLC" id="e7b-y6-itz"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem title="Move down 1px" tag="23" keyEquivalent="" id="T88-KV-33B">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="moveAround:" target="Voe-Tx-rLC" id="gZw-Fh-AIF"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Move down 10px" tag="23" alternate="YES" keyEquivalent="" id="jnW-ch-rkY">
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
+                                            <connections>
+                                                <action selector="moveAround:" target="Voe-Tx-rLC" id="fPK-u8-6JB"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="Uol-cd-eOj"/>
