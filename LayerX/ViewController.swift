@@ -20,8 +20,8 @@ class ViewController: NSViewController {
 	}
 
 	lazy var trackingArea: NSTrackingArea = {
-		let options: NSTrackingArea.Options = [.activeAlways, .mouseEnteredAndExited]
-		return NSTrackingArea(rect: self.view.bounds, options: options, owner: self, userInfo: nil)
+		let options: NSTrackingArea.Options = [.activeAlways, .mouseEnteredAndExited, .inVisibleRect]
+		return NSTrackingArea(rect: view.bounds, options: options, owner: self, userInfo: nil)
 	}()
 
 	deinit {
