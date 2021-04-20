@@ -14,7 +14,8 @@ Support Mac OS X 10.10 or later.
 - [x] Keyboard Shortcuts
 - [x] Adjust transparency  
 - [x] Lock images
-- [X] Aspect ratio scaling
+- [x] Aspect ratio scaling
+- [x] Switching between multiple images
 
 # Keyboard Shortcuts
 
@@ -23,6 +24,8 @@ Support Mac OS X 10.10 or later.
 | Key | Action |
 |:--- |:---    |
 |`⌘ V`| Paste image or file from clipboard. |
+|`⌘ 1-9`| Switch between image tabs. |
+|`⌘ W`| Remove image assigned to the current tab. |
 
 ### Scale
 

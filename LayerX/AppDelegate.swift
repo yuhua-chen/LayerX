@@ -23,9 +23,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	var isLockIconHiddenWhileLocked = false {
 		didSet { viewController.lockIconImageView.isHidden = window.isMovable || isLockIconHiddenWhileLocked }
 	}
-	var isSizeHidden = false {
-		didSet { viewController.sizeTextField.isHidden = isSizeHidden }
-	}
 
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
 		if let window = NSApp.windows.first as? MCWIndow {
@@ -48,10 +45,10 @@ fileprivate enum ArrowTag: Int {
 extension AppDelegate {
 
 	private var originalSize: NSSize {
-		viewController.imageView.image?.size ?? defaultSize
+		viewController.imageSize ?? defaultSize
 	}
 
-	private func resizeAspectFit(calculator: (_ original: CGFloat, _ current: CGFloat) -> CGFloat) {
+	func resizeAspectFit(calculator: (_ original: CGFloat, _ current: CGFloat) -> CGFloat) {
 		let originalSize = self.originalSize
 		let width = calculator(originalSize.width, window.frame.size.width)
 		let height = width / originalSize.width * originalSize.height
@@ -82,15 +79,11 @@ extension AppDelegate {
 	}
 
 	@IBAction func increaseTransparency(_ sender: AnyObject) {
-		var alpha = viewController.imageView.alphaValue
-		alpha -= 0.1
-		viewController.imageView.alphaValue = max(alpha, 0.05)
+		viewController.changeTransparency(by: -0.1)
 	}
 
 	@IBAction func reduceTransparency(_ sender: AnyObject) {
-		var alpha = viewController.imageView.alphaValue
-		alpha += 0.1
-		viewController.imageView.alphaValue = min(alpha, 1.0)
+		viewController.changeTransparency(by: 0.1)
 	}
 	
 	func getPasteboardImage() -> NSImage? {
@@ -112,16 +105,10 @@ extension AppDelegate {
 
 		return nil
 	}
-	
+
 	@IBAction func paste(_ sender: AnyObject) {
 		guard let image = getPasteboardImage() else { return }
-		let rep = image.representations[0]
-		viewController.imageView.image = image
-		let size = NSMakeSize(CGFloat(rep.pixelsWide), CGFloat(rep.pixelsHigh))
-		window.resizeTo(size, animated: true)
-		viewController.sizeTextField.isHidden = false
-		viewController.placeholderTextField.isHidden = true
-
+		viewController.updateCurrentImage(image)
 	}
 	
 	@IBAction func toggleLockWindow(_ sender: AnyObject) {
@@ -164,7 +151,7 @@ extension AppDelegate {
 	@IBAction func toggleSizeVisibility(_ sender: AnyObject) {
 		let menuItem = sender as! NSMenuItem
 		menuItem.state = menuItem.state == .on ? .off : .on
-		isSizeHidden = menuItem.state == .on
+		viewController.isSizeHidden = menuItem.state == .on
 	}
 
 	@IBAction func moveAround(_ sender: AnyObject) {
@@ -196,10 +183,6 @@ extension AppDelegate {
 			menuItem.title = "Keep on all spaces"
 			window.collectionBehavior = [.managed, .moveToActiveSpace]
 		}
-	}
-
-	func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
-		return viewController.imageView.image != nil
 	}
 }
 

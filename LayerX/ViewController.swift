@@ -10,19 +10,32 @@ import Cocoa
 
 class ViewController: NSViewController {
 
-	@IBOutlet weak var imageView: MCDragAndDropImageView!
+	@IBOutlet private weak var imageView: MCDragAndDropImageView!
 	@IBOutlet weak var sizeTextField: NSTextField!
 	@IBOutlet weak var placeholderTextField: NSTextField!
 	@IBOutlet weak var lockIconImageView: NSImageView!
+	@IBOutlet weak var tabTextField: NSTextField!
+
+	var isSizeHidden = false {
+		didSet { updateTextFieldVisibility() }
+	}
+
+	private var currentTab = 1 // Falls in range 1...9
+	private var tabImages = [Int: NSImage]()
 
 	override var acceptsFirstResponder: Bool {
 		return true
 	}
 
 	lazy var trackingArea: NSTrackingArea = {
-		let options: NSTrackingArea.Options = [.activeAlways, .mouseEnteredAndExited]
-		return NSTrackingArea(rect: self.view.bounds, options: options, owner: self, userInfo: nil)
+		let options: NSTrackingArea.Options = [.activeAlways, .mouseEnteredAndExited, .inVisibleRect]
+		return NSTrackingArea(rect: view.bounds, options: options, owner: self, userInfo: nil)
 	}()
+
+	private var isMouseInView: Bool {
+		guard let window = view.window else { return false }
+		return view.isMousePoint(window.mouseLocationOutsideOfEventStream, in: view.frame)
+	}
 
 	deinit {
 		NotificationCenter.default.removeObserver(self)
@@ -49,42 +62,106 @@ class ViewController: NSViewController {
 		NotificationCenter.default.addObserver(self, selector: #selector(windowDidResize(_:)), name: NSWindow.didResizeNotification, object: appDelegate().window)
 
 		view.addTrackingArea(trackingArea)
+
+		NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event -> NSEvent? in
+			if event.modifierFlags.contains(.command), event.characters?.count == 1 {
+				if event.characters?.lowercased() == "w" {
+					self?.updateCurrentImage(nil)
+					return nil
+				} else if let digit = event.characters.flatMap(Int.init), digit != 0 {
+					self?.selectTab(digit)
+					return nil
+				}
+			}
+
+			return event
+		}
 	}
 
-	@objc func fadeOutSizeTextField() {
-		let transition = CATransition()
-		sizeTextField.layer?.add(transition, forKey: "fadeOut")
-		sizeTextField.layer?.opacity = 0
+	// MARK: Tabs management
+
+	var imageSize: NSSize? {
+		guard let image = imageView.image else { return nil }
+		let pixelSize = image.representations.first.map { NSSize(width: $0.pixelsWide, height: $0.pixelsHigh) }
+		return pixelSize ?? image.size
+	}
+
+	func selectTab(_ tab: Int) {
+		currentTab = tab
+		tabTextField.stringValue = "⌘ \(tab)"
+
+		let image = tabImages[currentTab]
+		showImage(image)
+
+		if image != nil {
+			appDelegate().resizeAspectFit(calculator: { $1 })
+		}
+	}
+
+	func updateCurrentImage(_ image: NSImage?) {
+		let hadNoImages = tabImages.isEmpty
+
+		tabImages[currentTab] = image
+		showImage(image)
+
+		if image != nil {
+			appDelegate().resizeAspectFit(calculator: { hadNoImages ? $0 : $1 })
+		}
+	}
+
+	private func showImage(_ image: NSImage?) {
+		imageView.image = image
+
+		tabTextField.isHidden = false
+		updateTextFieldVisibility()
+
+		tabTextField.fadeIn()
+		if !isMouseInView {
+			tabTextField.fadeOutAfterDelay()
+		}
+	}
+
+	private func updateTextFieldVisibility() {
+		let hasImage = imageView.image != nil
+
+		sizeTextField.isHidden = !hasImage || isSizeHidden
+		placeholderTextField.isHidden = hasImage
+	}
+
+	// MARK: Actions
+
+	func changeTransparency(by diff: CGFloat) {
+		imageView.alphaValue = min(max(imageView.alphaValue + diff, 0.05), 1.0)
 	}
 
 	@objc func windowDidResize(_ notification: Notification) {
 		let window = notification.object as! NSWindow
 		let size = window.frame.size
 		sizeTextField.stringValue = "\(Int(size.width))x\(Int(size.height))"
-		sizeTextField.layer?.opacity = 1
+		sizeTextField.fadeIn()
 
-		NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(ViewController.fadeOutSizeTextField), object: nil)
-		perform(#selector(ViewController.fadeOutSizeTextField), with: nil, afterDelay: 2)
+		if !isMouseInView {
+			sizeTextField.fadeOutAfterDelay()
+		}
 	}
 
 	// MARK: Mouse events
 
 	override func scrollWheel(with theEvent: NSEvent) {
-		guard let _ = imageView.image else { return }
+		guard imageView.image != nil else { return }
 
-		let delta = theEvent.deltaY * 0.005;
-		var alpha = imageView.alphaValue - delta
-		alpha = min(alpha, 1)
-		alpha = max(alpha, 0.05)
-		imageView.alphaValue = alpha
+		let delta = theEvent.deltaY * 0.005
+		changeTransparency(by: -delta)
 	}
 
 	override func mouseEntered(with theEvent: NSEvent) {
-		sizeTextField.layer?.opacity = 1
+		sizeTextField.fadeIn()
+		tabTextField.fadeIn()
 	}
 
 	override func mouseExited(with theEvent: NSEvent) {
-		fadeOutSizeTextField()
+		sizeTextField.fadeOut()
+		tabTextField.fadeOut()
 	}
 }
 
@@ -92,11 +169,7 @@ class ViewController: NSViewController {
 
 extension ViewController: MCDragAndDropImageViewDelegate {
 	func dragAndDropImageViewDidDrop(_ imageView: MCDragAndDropImageView) {
-
-		sizeTextField.isHidden = false
-		placeholderTextField.isHidden = true
-
-		appDelegate().actualSize(nil)
+		updateCurrentImage(imageView.image)
 	}
 }
 
@@ -106,4 +179,29 @@ class MCMovableView: NSView{
 	override var mouseDownCanMoveWindow:Bool {
 		return true
 	}
+}
+
+// MARK: - Hiding text
+
+fileprivate extension NSView {
+
+	func fadeIn() {
+		NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(fadeOut), object: nil)
+
+		layer?.opacity = 1
+	}
+
+	@objc func fadeOut() {
+		// Fade out is always animated
+		let transition = CATransition()
+		layer?.add(transition, forKey: "fadeOut")
+		layer?.opacity = 0
+	}
+
+	func fadeOutAfterDelay() {
+		NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(fadeOut), object: nil)
+
+		perform(#selector(fadeOut), with: nil, afterDelay: 2)
+	}
+
 }
