@@ -10,7 +10,7 @@ import Cocoa
 
 class ViewController: NSViewController {
 
-	@IBOutlet weak var imageView: MCDragAndDropImageView!
+	@IBOutlet private weak var imageView: MCDragAndDropImageView!
 	@IBOutlet weak var sizeTextField: NSTextField!
 	@IBOutlet weak var placeholderTextField: NSTextField!
 	@IBOutlet weak var lockIconImageView: NSImageView!
@@ -51,6 +51,25 @@ class ViewController: NSViewController {
 		view.addTrackingArea(trackingArea)
 	}
 
+	var imageSize: NSSize? {
+		guard let image = imageView.image else { return nil }
+		let pixelSize = image.representations.first.map { NSSize(width: $0.pixelsWide, height: $0.pixelsHigh) }
+		return pixelSize ?? image.size
+	}
+
+	func updateCurrentImage(_ image: NSImage?) {
+		imageView.image = image
+
+		sizeTextField.isHidden = image == nil
+		placeholderTextField.isHidden = image != nil
+	}
+
+	// MARK: Actions
+
+	func changeTransparency(by diff: CGFloat) {
+		imageView.alphaValue = min(max(imageView.alphaValue + diff, 0.05), 1.0)
+	}
+
 	@objc func fadeOutSizeTextField() {
 		let transition = CATransition()
 		sizeTextField.layer?.add(transition, forKey: "fadeOut")
@@ -70,13 +89,10 @@ class ViewController: NSViewController {
 	// MARK: Mouse events
 
 	override func scrollWheel(with theEvent: NSEvent) {
-		guard let _ = imageView.image else { return }
+		guard imageView.image != nil else { return }
 
-		let delta = theEvent.deltaY * 0.005;
-		var alpha = imageView.alphaValue - delta
-		alpha = min(alpha, 1)
-		alpha = max(alpha, 0.05)
-		imageView.alphaValue = alpha
+		let delta = theEvent.deltaY * 0.005
+		changeTransparency(by: -delta)
 	}
 
 	override func mouseEntered(with theEvent: NSEvent) {
@@ -92,9 +108,7 @@ class ViewController: NSViewController {
 
 extension ViewController: MCDragAndDropImageViewDelegate {
 	func dragAndDropImageViewDidDrop(_ imageView: MCDragAndDropImageView) {
-
-		sizeTextField.isHidden = false
-		placeholderTextField.isHidden = true
+		updateCurrentImage(imageView.image)
 
 		appDelegate().actualSize(nil)
 	}

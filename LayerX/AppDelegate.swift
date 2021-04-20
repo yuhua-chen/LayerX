@@ -48,7 +48,7 @@ fileprivate enum ArrowTag: Int {
 extension AppDelegate {
 
 	private var originalSize: NSSize {
-		viewController.imageView.image?.size ?? defaultSize
+		viewController.imageSize ?? defaultSize
 	}
 
 	private func resizeAspectFit(calculator: (_ original: CGFloat, _ current: CGFloat) -> CGFloat) {
@@ -82,15 +82,11 @@ extension AppDelegate {
 	}
 
 	@IBAction func increaseTransparency(_ sender: AnyObject) {
-		var alpha = viewController.imageView.alphaValue
-		alpha -= 0.1
-		viewController.imageView.alphaValue = max(alpha, 0.05)
+		viewController.changeTransparency(by: -0.1)
 	}
 
 	@IBAction func reduceTransparency(_ sender: AnyObject) {
-		var alpha = viewController.imageView.alphaValue
-		alpha += 0.1
-		viewController.imageView.alphaValue = min(alpha, 1.0)
+		viewController.changeTransparency(by: 0.1)
 	}
 	
 	func getPasteboardImage() -> NSImage? {
@@ -112,16 +108,15 @@ extension AppDelegate {
 
 		return nil
 	}
-	
+
 	@IBAction func paste(_ sender: AnyObject) {
 		guard let image = getPasteboardImage() else { return }
-		let rep = image.representations[0]
-		viewController.imageView.image = image
-		let size = NSMakeSize(CGFloat(rep.pixelsWide), CGFloat(rep.pixelsHigh))
-		window.resizeTo(size, animated: true)
-		viewController.sizeTextField.isHidden = false
-		viewController.placeholderTextField.isHidden = true
 
+		viewController.updateCurrentImage(image)
+
+		if let size = viewController.imageSize {
+			window.resizeTo(size, animated: true)
+		}
 	}
 	
 	@IBAction func toggleLockWindow(_ sender: AnyObject) {
@@ -196,10 +191,6 @@ extension AppDelegate {
 			menuItem.title = "Keep on all spaces"
 			window.collectionBehavior = [.managed, .moveToActiveSpace]
 		}
-	}
-
-	func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
-		return viewController.imageView.image != nil
 	}
 }
 
