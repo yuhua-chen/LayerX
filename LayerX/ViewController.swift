@@ -24,6 +24,11 @@ class ViewController: NSViewController {
 		return NSTrackingArea(rect: view.bounds, options: options, owner: self, userInfo: nil)
 	}()
 
+	private var isMouseInView: Bool {
+		guard let window = view.window else { return false }
+		return view.isMousePoint(window.mouseLocationOutsideOfEventStream, in: view.frame)
+	}
+
 	deinit {
 		NotificationCenter.default.removeObserver(self)
 	}
@@ -70,20 +75,15 @@ class ViewController: NSViewController {
 		imageView.alphaValue = min(max(imageView.alphaValue + diff, 0.05), 1.0)
 	}
 
-	@objc func fadeOutSizeTextField() {
-		let transition = CATransition()
-		sizeTextField.layer?.add(transition, forKey: "fadeOut")
-		sizeTextField.layer?.opacity = 0
-	}
-
 	@objc func windowDidResize(_ notification: Notification) {
 		let window = notification.object as! NSWindow
 		let size = window.frame.size
 		sizeTextField.stringValue = "\(Int(size.width))x\(Int(size.height))"
-		sizeTextField.layer?.opacity = 1
+		sizeTextField.fadeIn()
 
-		NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(ViewController.fadeOutSizeTextField), object: nil)
-		perform(#selector(ViewController.fadeOutSizeTextField), with: nil, afterDelay: 2)
+		if !isMouseInView {
+			sizeTextField.fadeOutAfterDelay()
+		}
 	}
 
 	// MARK: Mouse events
@@ -96,11 +96,11 @@ class ViewController: NSViewController {
 	}
 
 	override func mouseEntered(with theEvent: NSEvent) {
-		sizeTextField.layer?.opacity = 1
+		sizeTextField.fadeIn()
 	}
 
 	override func mouseExited(with theEvent: NSEvent) {
-		fadeOutSizeTextField()
+		sizeTextField.fadeOut()
 	}
 }
 
@@ -120,4 +120,29 @@ class MCMovableView: NSView{
 	override var mouseDownCanMoveWindow:Bool {
 		return true
 	}
+}
+
+// MARK: - Hiding text
+
+fileprivate extension NSView {
+
+	func fadeIn() {
+		NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(fadeOut), object: nil)
+
+		layer?.opacity = 1
+	}
+
+	@objc func fadeOut() {
+		// Fade out is always animated
+		let transition = CATransition()
+		layer?.add(transition, forKey: "fadeOut")
+		layer?.opacity = 0
+	}
+
+	func fadeOutAfterDelay() {
+		NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(fadeOut), object: nil)
+
+		perform(#selector(fadeOut), with: nil, afterDelay: 2)
+	}
+
 }
