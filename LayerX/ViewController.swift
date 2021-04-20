@@ -89,12 +89,24 @@ class ViewController: NSViewController {
 	func selectTab(_ tab: Int) {
 		currentTab = tab
 		tabTextField.stringValue = "⌘ \(tab)"
-		showImage(tabImages[currentTab])
+
+		let image = tabImages[currentTab]
+		showImage(image)
+
+		if image != nil {
+			appDelegate().resizeAspectFit(calculator: { $1 })
+		}
 	}
 
 	func updateCurrentImage(_ image: NSImage?) {
+		let hadNoImages = tabImages.isEmpty
+
 		tabImages[currentTab] = image
 		showImage(image)
+
+		if image != nil {
+			appDelegate().resizeAspectFit(calculator: { hadNoImages ? $0 : $1 })
+		}
 	}
 
 	private func showImage(_ image: NSImage?) {
@@ -158,8 +170,6 @@ class ViewController: NSViewController {
 extension ViewController: MCDragAndDropImageViewDelegate {
 	func dragAndDropImageViewDidDrop(_ imageView: MCDragAndDropImageView) {
 		updateCurrentImage(imageView.image)
-
-		appDelegate().actualSize(nil)
 	}
 }
 

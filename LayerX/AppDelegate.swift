@@ -48,7 +48,7 @@ extension AppDelegate {
 		viewController.imageSize ?? defaultSize
 	}
 
-	private func resizeAspectFit(calculator: (_ original: CGFloat, _ current: CGFloat) -> CGFloat) {
+	func resizeAspectFit(calculator: (_ original: CGFloat, _ current: CGFloat) -> CGFloat) {
 		let originalSize = self.originalSize
 		let width = calculator(originalSize.width, window.frame.size.width)
 		let height = width / originalSize.width * originalSize.height
@@ -108,12 +108,7 @@ extension AppDelegate {
 
 	@IBAction func paste(_ sender: AnyObject) {
 		guard let image = getPasteboardImage() else { return }
-
 		viewController.updateCurrentImage(image)
-
-		if let size = viewController.imageSize {
-			window.resizeTo(size, animated: true)
-		}
 	}
 	
 	@IBAction func toggleLockWindow(_ sender: AnyObject) {
