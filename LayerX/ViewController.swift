@@ -14,6 +14,14 @@ class ViewController: NSViewController {
 	@IBOutlet weak var sizeTextField: NSTextField!
 	@IBOutlet weak var placeholderTextField: NSTextField!
 	@IBOutlet weak var lockIconImageView: NSImageView!
+	@IBOutlet weak var tabTextField: NSTextField!
+
+	var isSizeHidden = false {
+		didSet { updateTextFieldVisibility() }
+	}
+
+	private var currentTab = 1 // Falls in range 1...9
+	private var tabImages = [Int: NSImage]()
 
 	override var acceptsFirstResponder: Bool {
 		return true
@@ -54,7 +62,23 @@ class ViewController: NSViewController {
 		NotificationCenter.default.addObserver(self, selector: #selector(windowDidResize(_:)), name: NSWindow.didResizeNotification, object: appDelegate().window)
 
 		view.addTrackingArea(trackingArea)
+
+		NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event -> NSEvent? in
+			if event.modifierFlags.contains(.command), event.characters?.count == 1 {
+				if event.characters?.lowercased() == "w" {
+					self?.updateCurrentImage(nil)
+					return nil
+				} else if let digit = event.characters.flatMap(Int.init), digit != 0 {
+					self?.selectTab(digit)
+					return nil
+				}
+			}
+
+			return event
+		}
 	}
+
+	// MARK: Tabs management
 
 	var imageSize: NSSize? {
 		guard let image = imageView.image else { return nil }
@@ -62,11 +86,34 @@ class ViewController: NSViewController {
 		return pixelSize ?? image.size
 	}
 
+	func selectTab(_ tab: Int) {
+		currentTab = tab
+		tabTextField.stringValue = "⌘ \(tab)"
+		showImage(tabImages[currentTab])
+	}
+
 	func updateCurrentImage(_ image: NSImage?) {
+		tabImages[currentTab] = image
+		showImage(image)
+	}
+
+	private func showImage(_ image: NSImage?) {
 		imageView.image = image
 
-		sizeTextField.isHidden = image == nil
-		placeholderTextField.isHidden = image != nil
+		tabTextField.isHidden = false
+		updateTextFieldVisibility()
+
+		tabTextField.fadeIn()
+		if !isMouseInView {
+			tabTextField.fadeOutAfterDelay()
+		}
+	}
+
+	private func updateTextFieldVisibility() {
+		let hasImage = imageView.image != nil
+
+		sizeTextField.isHidden = !hasImage || isSizeHidden
+		placeholderTextField.isHidden = hasImage
 	}
 
 	// MARK: Actions
@@ -97,10 +144,12 @@ class ViewController: NSViewController {
 
 	override func mouseEntered(with theEvent: NSEvent) {
 		sizeTextField.fadeIn()
+		tabTextField.fadeIn()
 	}
 
 	override func mouseExited(with theEvent: NSEvent) {
 		sizeTextField.fadeOut()
+		tabTextField.fadeOut()
 	}
 }
 

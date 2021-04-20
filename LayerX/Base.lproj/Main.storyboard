@@ -307,6 +307,14 @@
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                 </textFieldCell>
                             </textField>
+                            <textField hidden="YES" wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kNK-da-5FA">
+                                <rect key="frame" x="10" y="244" width="30" height="16"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" alignment="center" title="⌘ 1" drawsBackground="YES" id="N44-hk-hFy">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                                </textFieldCell>
+                            </textField>
                             <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8Vs-Az-CYd">
                                 <rect key="frame" x="148" y="123" width="184" height="25"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Drop Images here." id="vTq-g5-aKV">
@@ -327,12 +335,14 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="3I3-1H-JKb" secondAttribute="bottom" constant="10" id="64H-0g-nnO"/>
                             <constraint firstItem="8Vs-Az-CYd" firstAttribute="centerY" secondItem="m2S-Jp-Qdl" secondAttribute="centerY" id="6fI-na-pdX"/>
+                            <constraint firstItem="kNK-da-5FA" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="10" id="9LJ-n2-2gE"/>
                             <constraint firstItem="8Vs-Az-CYd" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="RwW-eB-OYh"/>
                             <constraint firstItem="JAT-ZL-8HB" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="10" id="WnK-c6-NWw"/>
                             <constraint firstItem="pOu-B0-2Yd" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="aC7-xh-2BR"/>
                             <constraint firstItem="pOu-B0-2Yd" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="lhy-17-EcM"/>
                             <constraint firstAttribute="trailing" secondItem="pOu-B0-2Yd" secondAttribute="trailing" id="qbm-Dq-jeg"/>
                             <constraint firstAttribute="bottom" secondItem="pOu-B0-2Yd" secondAttribute="bottom" id="r2U-99-hj5"/>
+                            <constraint firstItem="kNK-da-5FA" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="10" id="tUz-La-jPF"/>
                             <constraint firstAttribute="trailing" secondItem="3I3-1H-JKb" secondAttribute="trailing" constant="10" id="und-pJ-9Mz"/>
                             <constraint firstAttribute="trailing" secondItem="JAT-ZL-8HB" secondAttribute="trailing" constant="10" id="xlU-hc-l09"/>
                         </constraints>
@@ -342,6 +352,7 @@
                         <outlet property="lockIconImageView" destination="3I3-1H-JKb" id="Nka-rj-tDO"/>
                         <outlet property="placeholderTextField" destination="8Vs-Az-CYd" id="env-Po-Bb7"/>
                         <outlet property="sizeTextField" destination="JAT-ZL-8HB" id="vIP-80-PVG"/>
+                        <outlet property="tabTextField" destination="kNK-da-5FA" id="bpw-Fo-3hM"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
